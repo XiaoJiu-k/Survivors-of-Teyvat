@@ -1,5 +1,5 @@
 #include "putimage_alpha.h"
-#pragma comment(lib, "msimg32.lib")
+
 putimage_alpha::putimage_alpha(int x, int y, IMAGE* img)
 {
 	int w = img->getwidth();

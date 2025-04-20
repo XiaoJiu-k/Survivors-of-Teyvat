@@ -1,9 +1,10 @@
 #include "Enemy.h"
 #include "putimage_alpha.h"
+#include <string>
 
 Enemy::Enemy()
 {
-	loadimage(&img_shadow, _T("img/shadow_player.png"));
+	loadimage(&img_shadow, _T("img/shadow_enemy.png"));
 	anim_left = new Animation(_T("img/enemy_left_%d.png"), 6, 45);
 	anim_right = new Animation(_T("img/enemy_right_%d.png"), 6, 45);
 
@@ -40,12 +41,21 @@ Enemy::~Enemy()
 
 bool Enemy::CheckBulletCollision(const Bullet& bullet)
 {
-	return false;
+	//子弹判断
+	bool is_overlap_x = bullet.position.x >= position.x && bullet.position.x <= position.x + FRAME_WIDTH;
+	bool is_overlap_y = bullet.position.y >= position.y && bullet.position.y <= position.y + FRAME_HEIGHT;
+	return is_overlap_x && is_overlap_y;
 }
 
-bool Enemy::CheckPlayerCollision(const Bullet& bullet)
+bool Enemy::CheckPlayerCollision(const Player& player)
 {
-	return false;
+	//判断玩家是否在物体内
+	POINT chek_position = { position.x + FRAME_WIDTH / 2, position.y + FRAME_HEIGHT / 2 };
+	// 获取玩家的位置
+	POINT playerPos = player.GetPosition();
+	bool is_overlap_x = chek_position.x >= playerPos.x && chek_position.x <= playerPos.x + FRAME_WIDTH;
+	bool is_overlap_y = chek_position.y >= playerPos.y && chek_position.y <= playerPos.y + FRAME_HEIGHT;
+	return is_overlap_x && is_overlap_y;
 }
 
 void Enemy::Move(const Player& player)
@@ -60,6 +70,10 @@ void Enemy::Move(const Player& player)
 		position.x += (int)(SPEED * normalized_x);
 		position.y += (int)(SPEED * normalized_y);
 	}
+	if (dir_x < 0)
+		facing_left = true;
+	else if (dir_x > 0)
+		facing_left = false;
 }
 
 void Enemy::Draw(int delta)
@@ -67,11 +81,21 @@ void Enemy::Draw(int delta)
 	int pos_shadow_x = position.x + (FRAME_WIDTH / 2 - SHADOW_WIDTH / 2);
 	int pos_shadow_y = position.y + FRAME_HEIGHT - 8;
 	putimage_alpha(pos_shadow_x, pos_shadow_y, &img_shadow);
-
+	 
 	if (facing_left)
 		anim_left->Play(position.x, position.y, delta);
 	else
 		anim_right->Play(position.x, position.y, delta);
+}
+
+void Enemy::Hurt()
+{
+	alive = false;
+}
+
+bool Enemy::CheckAlive()
+{
+	return alive;
 }
 
 

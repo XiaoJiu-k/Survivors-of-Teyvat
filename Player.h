@@ -16,7 +16,7 @@ public:
 
 	
 
-private:
+public:
 	static constexpr int PLAYER_SPEED = 3; // 玩家速度
 	static constexpr int PLAYER_WIDTH = 80; // 玩家宽度
 	static constexpr int PLAYER_HEIGHT = 80; // 玩家高度
