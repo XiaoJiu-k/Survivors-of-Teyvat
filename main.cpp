@@ -113,9 +113,9 @@ int main() {
 	region_btn_start_game.bottom = region_btn_start_game.top + BUTTON_HEIGHT;
 
 	region_btn_quit_game.left = (WINDOW_WIDTH - BUTTON_WIDTH) / 2;
-	region_btn_quit_game.right = region_btn_start_game.left + BUTTON_WIDTH;
+	region_btn_quit_game.right = region_btn_quit_game.left + BUTTON_WIDTH;
 	region_btn_quit_game.top = 550;
-	region_btn_quit_game.bottom = region_btn_start_game.top + BUTTON_HEIGHT;
+	region_btn_quit_game.bottom = region_btn_quit_game.top + BUTTON_HEIGHT;
 
 	StartGameButton btn_start_game = StartGameButton(region_btn_start_game,
 		_T("img/ui_start_idle.png"),_T("img/ui_start_hovered.png"), _T("img/ui_start_pushed.png"));
