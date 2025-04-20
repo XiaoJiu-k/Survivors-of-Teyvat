@@ -3,9 +3,11 @@
 #include "Animation.h"
 #include "Bullet.h"
 #include "Player.h"
+#include "Atlas.h"
 class Enemy
 {
 public:
+
 	Enemy();
 	~Enemy();
 	bool CheckBulletCollision(const Bullet& bullet);

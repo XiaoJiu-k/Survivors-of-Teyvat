@@ -2,7 +2,7 @@
 
 #include <graphics.h>
 #include "Animation.h"
-
+#include "Atlas.h"
 class Player
 {
 public:
@@ -25,6 +25,7 @@ public:
 	static constexpr int WINDOW_WIDTH = 1280;
 	static constexpr int WINDOW_HEIGHT = 720;
 
+
 private:
 	POINT player_pos = { 500,500 };
 	IMAGE img_shadow;
@@ -41,5 +42,6 @@ private:
 	//int idx_current_anim = 0;
 	/*IMAGE img_player_left[PLAYER_ANIM_NUM];
 	IMAGE img_player_right[PLAYER_ANIM_NUM];*/
+
 };
 
